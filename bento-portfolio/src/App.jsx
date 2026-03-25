@@ -7,7 +7,6 @@ import TechStackCard from './components/TechStackCard'
 import FeaturedProjectCard from './components/FeaturedProjectCard'
 import ContactCard from './components/ContactCard'
 
-
 export default function App() {
   const [darkMode, setDarkMode] = useState(() => {
     const saved = localStorage.getItem('theme')
@@ -26,20 +25,18 @@ export default function App() {
     }
   }, [darkMode])
 
-  const toggleDark = () => setDarkMode(prev => !prev)
-
   return (
-    <div className="antialiased min-h-screen flex flex-col transition-colors duration-500 w-full overflow-x-hidden">
-      <Header darkMode={darkMode} toggleDark={toggleDark} />
-
-      <main className="flex-1 w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 pb-20">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 auto-rows-[180px] gap-4 md:gap-6 grid-flow-dense">
-          <HeroCard />            
-          <LocationCard />        
-          <SocialCard />          
-          <TechStackCard />       
-          <FeaturedProjectCard /> 
-          <ContactCard />      
+    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', width: '100%', overflow: 'hidden' }}>
+      <Header darkMode={darkMode} toggleDark={() => setDarkMode(p => !p)} />
+      <main style={{ flex: 1, width: '100%', maxWidth: '1440px', margin: '0 auto', padding: '0 1rem 5rem' }}>
+        {/* bento-grid is defined in index.css with real @media queries — no Tailwind scanner needed */}
+        <div className="bento-grid">
+          <HeroCard />
+          <LocationCard />
+          <SocialCard />
+          <TechStackCard />
+          <FeaturedProjectCard />
+          <ContactCard />
         </div>
       </main>
     </div>

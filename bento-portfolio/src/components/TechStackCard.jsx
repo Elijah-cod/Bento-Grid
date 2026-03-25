@@ -1,44 +1,32 @@
-import {
-    FileJsx, FileTs, Wind, Hexagon, GridFour, FigmaLogo
-} from '@phosphor-icons/react'
+import { FileJsx, FileTs, Wind, Hexagon, GridFour, FigmaLogo } from '@phosphor-icons/react'
 
 const stack = [
-    { id: 'react', label: 'React', icon: FileJsx, iconColor: '#61DAFB' },
-    { id: 'typescript', label: 'TypeScript', icon: FileTs, iconColor: '#3178C6' },
-    { id: 'tailwind', label: 'Tailwind CSS', icon: Wind, iconColor: '#38B2AC' },
-    { id: 'node', label: 'Node.js', icon: Hexagon, iconColor: '#68A063' },
-    { id: 'cssgrid', label: 'CSS Grid', icon: GridFour, iconColor: null },     // inherits text color
-    { id: 'figma', label: 'Figma', icon: FigmaLogo, iconColor: '#F24E1E' },
+  { id:'react',      label:'React',        Icon:FileJsx,   color:'#61DAFB' },
+  { id:'typescript', label:'TypeScript',   Icon:FileTs,    color:'#3178C6' },
+  { id:'tailwind',   label:'Tailwind CSS', Icon:Wind,      color:'#38B2AC' },
+  { id:'node',       label:'Node.js',      Icon:Hexagon,   color:'#68A063' },
+  { id:'cssgrid',    label:'CSS Grid',     Icon:GridFour,  color:null      },
+  { id:'figma',      label:'Figma',        Icon:FigmaLogo, color:'#F24E1E' },
 ]
 
+// col: 2 of 4, row: 1 tall
 export default function TechStackCard() {
-    return (
-        <article className="bento-card col-span-1 md:col-span-2 lg:col-span-2 row-span-1 p-6 flex flex-col justify-center">
-            <div className="flex items-center justify-between mb-4">
-                <h3 className="font-semibold text-lg flex items-center gap-2">
-                    <GridFour size={18} className="text-indigo-500" weight="fill" />
-                    Tech Stack
-                </h3>
-            </div>
-
-            <div className="flex flex-wrap gap-2 md:gap-3">
-                {stack.map(({ id, label, icon: Icon, iconColor }) => (
-                    <div
-                        key={id}
-                        className="
-              px-3 py-1.5 md:px-4 md:py-2 rounded-xl
-              bg-zinc-100 dark:bg-zinc-800 text-sm font-medium
-              flex items-center gap-2
-              border border-zinc-200 dark:border-zinc-700/50
-              hover:border-indigo-500 dark:hover:border-indigo-500
-              transition-colors cursor-default
-            "
-                    >
-                        <Icon size={16} style={iconColor ? { color: iconColor } : {}} />
-                        {label}
-                    </div>
-                ))}
-            </div>
-        </article>
-    )
+  return (
+    <article className="bento-card" style={{ gridColumn:'span 2', gridRow:'span 1', padding:'1.5rem', display:'flex', flexDirection:'column', justifyContent:'center' }}>
+      <div style={{ display:'flex', alignItems:'center', gap:8, marginBottom:'1rem' }}>
+        <GridFour size={18} weight="fill" style={{ color:'#6366f1' }} />
+        <h3 style={{ fontWeight:600, fontSize:'1.1rem', margin:0 }}>Tech Stack</h3>
+      </div>
+      <div style={{ display:'flex', flexWrap:'wrap', gap:8 }}>
+        {stack.map(({ id, label, Icon, color }) => (
+          <div key={id} style={{ display:'flex', alignItems:'center', gap:6, padding:'6px 14px', borderRadius:10, background:'var(--bg-body)', border:'1px solid var(--border-card)', fontSize:'0.85rem', fontWeight:500, cursor:'default', transition:'border-color 0.2s' }}
+            onMouseEnter={e => e.currentTarget.style.borderColor = 'var(--accent)'}
+            onMouseLeave={e => e.currentTarget.style.borderColor = 'var(--border-card)'}>
+            <Icon size={15} style={color ? { color } : {}} />
+            {label}
+          </div>
+        ))}
+      </div>
+    </article>
+  )
 }

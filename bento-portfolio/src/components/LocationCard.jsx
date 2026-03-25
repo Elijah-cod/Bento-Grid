@@ -1,28 +1,30 @@
+import { useState, useEffect } from 'react'
 import { GlobeHemisphereWest, Clock } from '@phosphor-icons/react'
 
+// col: 1 of 4, row: 1 tall
 export default function LocationCard() {
-    const time = new Date().toLocaleTimeString('en-KE', {
-        hour: '2-digit',
-        minute: '2-digit',
-        timeZone: 'Africa/Nairobi',
-    })
+  const [time, setTime] = useState('')
+  useEffect(() => {
+    const tick = () => setTime(new Date().toLocaleTimeString('en-GB', { hour:'2-digit', minute:'2-digit', timeZone:'Africa/Nairobi' }))
+    tick()
+    const id = setInterval(tick, 1000)
+    return () => clearInterval(id)
+  }, [])
 
-    return (
-        <article className="bento-card col-span-1 row-span-1 p-6 flex flex-col items-center justify-center text-center relative overflow-hidden">
-            <div className="absolute inset-0 opacity-5 dark:opacity-[0.02] project-pattern z-0" />
-
-            <div className="relative z-10 flex flex-col items-center gap-3">
-                <div className="w-12 h-12 rounded-full bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center mb-1">
-                    <GlobeHemisphereWest size={24} style={{ color: 'var(--accent)' }} />
-                </div>
-                <div>
-                    <h3 className="font-semibold text-lg">Nairobi, KE</h3>
-                    <p className="text-sm flex items-center justify-center gap-1 mt-1" style={{ color: 'var(--text-muted)' }}>
-                        <Clock size={12} />
-                        {time} EAT
-                    </p>
-                </div>
-            </div>
-        </article>
-    )
+  return (
+    <article className="bento-card" style={{ gridColumn:'span 1', gridRow:'span 1', padding:'1.5rem', display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', textAlign:'center', position:'relative' }}>
+      <div className="project-pattern" style={{ position:'absolute', inset:0, opacity:0.05, zIndex:0 }} />
+      <div style={{ position:'relative', zIndex:1, display:'flex', flexDirection:'column', alignItems:'center', gap:'12px' }}>
+        <div style={{ width:48, height:48, borderRadius:'50%', background:'var(--bg-body)', display:'flex', alignItems:'center', justifyContent:'center' }}>
+          <GlobeHemisphereWest size={24} style={{ color:'var(--accent)' }} />
+        </div>
+        <div>
+          <h3 style={{ fontWeight:600, fontSize:'1.1rem', margin:0 }}>Nairobi, KE</h3>
+          <p style={{ color:'var(--text-muted)', fontSize:'0.8rem', display:'flex', alignItems:'center', justifyContent:'center', gap:4, marginTop:4 }}>
+            <Clock size={12} /> {time} EAT
+          </p>
+        </div>
+      </div>
+    </article>
+  )
 }

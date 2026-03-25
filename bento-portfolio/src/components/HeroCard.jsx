@@ -1,34 +1,36 @@
+// col: 2 of 4, row: 2 tall — occupies top-left 2×2 block
 export default function HeroCard() {
-    return (
-        <article className="bento-card col-span-1 md:col-span-2 lg:col-span-2 row-span-2 p-8 relative overflow-hidden flex flex-col justify-between group">
+  return (
+    <article className="bento-card" style={{ gridColumn: 'span 2', gridRow: 'span 2', padding: '2rem', position: 'relative', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+      {/* Decorative blur orbs */}
+      <div style={{ position:'absolute', top:'-6rem', right:'-6rem', width:'16rem', height:'16rem', background:'rgba(99,102,241,0.2)', borderRadius:'50%', filter:'blur(60px)', pointerEvents:'none' }} />
+      <div style={{ position:'absolute', bottom:'-6rem', left:'-6rem', width:'16rem', height:'16rem', background:'rgba(168,85,247,0.2)', borderRadius:'50%', filter:'blur(60px)', pointerEvents:'none' }} />
 
-            <div className="absolute -top-24 -right-24 w-64 h-64 bg-indigo-500/20 rounded-full blur-3xl transition-all duration-700 group-hover:bg-indigo-500/30 pointer-events-none" />
-            <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-purple-500/20 rounded-full blur-3xl transition-all duration-700 group-hover:bg-purple-500/30 pointer-events-none" />
-            <div className="relative z-10 flex flex-col h-full">
+      <div style={{ position:'relative', zIndex:10, display:'flex', flexDirection:'column', height:'100%' }}>
+        {/* Available badge */}
+        <div style={{ marginBottom:'1.5rem' }}>
+          <span style={{ display:'inline-flex', alignItems:'center', gap:'8px', padding:'4px 12px', borderRadius:'999px', border:'1px solid #e4e4e7', background:'rgba(255,255,255,0.5)', backdropFilter:'blur(4px)', fontSize:'12px', fontWeight:500 }}>
+            <span style={{ position:'relative', display:'flex', width:8, height:8 }}>
+              <span className="animate-ping" style={{ position:'absolute', inset:0, borderRadius:'50%', background:'#34d399', opacity:0.75 }} />
+              <span style={{ position:'relative', width:8, height:8, borderRadius:'50%', background:'#10b981', display:'block' }} />
+            </span>
+            Available for work
+          </span>
+        </div>
 
-                <div className="flex justify-between items-start mb-6">
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-zinc-200 dark:border-zinc-700 bg-white/50 dark:bg-zinc-800/50 backdrop-blur-sm text-xs font-medium">
-                        <span className="relative flex h-2 w-2">
-                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
-                        </span>
-                        Available for work
-                    </div>
-                </div>
-
-                <div className="mt-auto">
-                    <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 leading-tight">
-                        Hi, I'm Elijah. <br />
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-purple-500">
-                            Frontend Engineer.
-                        </span>
-                    </h1>
-                    <p className="text-base md:text-lg max-w-md font-medium leading-relaxed" style={{ color: 'var(--text-muted)' }}>
-                        I craft responsive, pixel-perfect user interfaces with modern web technologies.
-                        Focused on performance, accessibility, and exceptional design.
-                    </p>
-                </div>
-            </div>
-        </article>
-    )
+        {/* Heading pushed to bottom */}
+        <div style={{ marginTop:'auto' }}>
+          <h1 style={{ fontSize:'clamp(2rem,5vw,3.5rem)', fontWeight:700, letterSpacing:'-0.03em', lineHeight:1.1, marginBottom:'1rem' }}>
+            Hi, I'm Elijah.<br />
+            <span style={{ background:'linear-gradient(to right, #6366f1, #a855f7)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text' }}>
+              Frontend Engineer.
+            </span>
+          </h1>
+          <p style={{ color:'var(--text-muted)', fontSize:'clamp(0.9rem,1.5vw,1.1rem)', maxWidth:'44ch', lineHeight:1.7 }}>
+            I craft responsive, pixel-perfect user interfaces with modern web technologies. Focused on performance, accessibility, and exceptional design.
+          </p>
+        </div>
+      </div>
+    </article>
+  )
 }
